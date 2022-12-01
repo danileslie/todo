@@ -13,7 +13,6 @@ body{
 #header{
     grid-column: 2;
     background: rgb(176, 224, 230);
-
 }
 
 #sidebar{
@@ -34,4 +33,8 @@ body{
     background: rgb(219, 192, 140);
 }
 
+.taskDiv{
+    border: 2px solid red;
+    margin: 0.3%;
+}
 

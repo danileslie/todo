@@ -9,7 +9,7 @@ document.body.appendChild(contentDiv);
 contentDiv.innerHTML = `
     <div id='header'>
         <div id='title'>
-            <p>Get To It!</p>
+            <p>Everything Is Due Forever</p>
         </div>
     </div>
 
