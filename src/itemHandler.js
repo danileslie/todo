@@ -13,7 +13,8 @@ const itemHandlers = (() => {
     // adding task
     if (target.classList.contains('add-task')){
          ui.addTaskUi(); 
-         ui.updateUi();   
+         
+           
     }
 
     //editing task
@@ -21,6 +22,13 @@ const itemHandlers = (() => {
     // grabbing index here so i can work with it from a different file
     index = parseInt(target.dataset.index);
     ui.editTaskUi(index);   
+    }
+
+    // deleting task
+    if (target.classList.contains('delete-task')){
+        index = parseInt(target.dataset.index);
+        ui.deleteUi(index);
+              
     }
     });
 })();

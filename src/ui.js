@@ -7,38 +7,53 @@ const ui = (() => {
     let taskDescription = document.querySelector('#enter-description');
     let taskDue = document.querySelector('#enter-due');
 
-  
-   
     function addTaskUi(){
     tasks.newTask(taskTitle.value, taskDescription.value, taskDue.value);
     form.reset();
-    console.log(tasks.taskList);
     } 
+
+    // clear the dom to prepare for update
+    const removeContent = (content) => {
+        while (content.firstChild) {
+            content.removeChild(content.lastChild);
+        }
+    }
 
     // add an index to the entries to lower need to crawl through array constantly
 
     function updateUi(){
+
+        // stops loop from making duplicate entries
+        tasksList.textContent = '';
+        
+    for (let i = 0; i < tasks.taskList.length; i++){
+
         let taskDiv = document.createElement('div');
         let taskTitleText = document.createElement('p');
         let taskDescriptionText = document.createElement('p');
         let taskDateText = document.createElement('p'); 
         let editButton = document.createElement('button');
-    for (let i = 0; i < tasks.taskList.length; i++){
+        let deleteButton = document.createElement('button');
+
         taskTitleText.textContent = tasks.taskList[i].title;
         taskDescriptionText.textContent = tasks.taskList[i].description;
         taskDateText.textContent = tasks.taskList[i].date;
+        editButton.textContent='edit';
+        deleteButton.textContent='delete';
 
-        //create visual on page after task is created
+        //create visual on page and attach index after task is created
         taskDiv.setAttribute('data-index', i);
         editButton.setAttribute('data-index', i);
+        deleteButton.setAttribute('data-index', i);
         taskTitleText.setAttribute('data-index', i);
         taskDescriptionText.setAttribute('data-index', i);
         taskDateText.setAttribute('data-index', i);
-        taskDiv.classList.add('taskDiv');
+        
         tasks.taskList[i].index = parseInt(taskDiv.dataset.index);
-        editButton.textContent='edit';
+        
+        taskDiv.classList.add('taskDiv');
         editButton.classList.add('edit-task');
-
+        deleteButton.classList.add('delete-task');
         taskTitleText.classList.add('title-text');
         taskDescriptionText.classList.add('description-text');
         taskDateText.classList.add('task-due');
@@ -47,12 +62,12 @@ const ui = (() => {
         taskDiv.appendChild(taskDescriptionText);
         taskDiv.appendChild(taskDateText);
         taskDiv.appendChild(editButton);
+        taskDiv.appendChild(deleteButton);
         tasksList.appendChild(taskDiv);
     }
     }
 
     function editTaskUi(index){
-        let task = tasks.taskList[index]
         let newTaskTitle = taskTitle.value;
         let newTaskDescription = taskDescription.value;
         let newTaskDate = taskDue.value;
@@ -63,20 +78,30 @@ const ui = (() => {
 
         //changes the task in the array
         tasks.editTask(newTaskTitle, newTaskDescription, newTaskDate, index);
-        console.log(tasks.taskList);
 
-        //changes the task in the dom
+        //changes the task on the dom
         taskTargetTitle.textContent = newTaskTitle;
         taskTargetDescription.textContent = newTaskDescription;
         taskTargetDate.textContent = newTaskDate;
 
     }
 
+    function deleteUi(index){
+        // deletes the entry from the array
+        tasks.deleteTask(index);
+        
+    //deletes entry from the dom and updates the index       
+        removeContent(tasksList);  
+        updateUi();
+    }
+
     return {
+        removeContent,
         updateUi,
         addTaskUi,
         editTaskUi,
-    }
+        deleteUi,
+    };
 
 
         
