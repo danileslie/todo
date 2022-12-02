@@ -12,29 +12,17 @@ const itemHandlers = (() => {
 
     // adding task
     if (target.classList.contains('add-task')){
-         ui.addTaskUi();    
+         ui.addTaskUi(); 
+         ui.updateUi();   
     }
 
+    //editing task
     if (target.classList.contains('edit-task')){
-        // grabbing index here so i can work with it from a different file
+    // grabbing index here so i can work with it from a different file
     index = parseInt(target.dataset.index);
-   ui.editTaskUi(index);
-        
+    ui.editTaskUi(index);   
     }
     });
-
-
-
-
-    // let addTaskButton = document.querySelector('.add-task');
-    
-
-    // addTaskButton.addEventListener('click', ui.domTasks);
-    
-
-
-
-
 })();
 
 export default itemHandlers;

@@ -38,20 +38,20 @@ contentDiv.innerHTML = `
         <form id='form' name='form' method='get'>
         <!-- Task Title -->
             <div class='title-area'>
-                <label for='task-title'>Title</label>
-                <input id='task-title' name='task-title' required type='text' autocomplete='off'></>
+                <label for='enter-title'>Title</label>
+                <input id='enter-title' name='enter-title' required type='text' autocomplete='off'></>
             </div>
 
         <!-- Task Description -->
             <div class='description-area'>
-                <label for='task-description'>Description</label>
-                <textarea id='task-description' name='task-description' required rows='5' cols='25' autocomplete='off'></textarea>
+                <label for='enter-description'>Description</label>
+                <textarea id='enter-description' name='enter-description' required rows='5' cols='25' autocomplete='off'></textarea>
             </div>
 
         <!-- Due Date -->
             <div class='date-area'>
                 <label for='task-due'>Due Date</label>
-                <input id='task-due' id='task-due' name='task-due' required type='date'>
+                <input id='enter-due' id='enter-due' name='enter-due' required type='date'>
             </div>
         </form>
 
