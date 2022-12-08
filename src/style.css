@@ -33,6 +33,10 @@ body{
    background: var(--dark-purple);
 }
 
+#projects-list{
+    margin-left: 20%;
+}
+
 #main{
     grid-row: 2/-1;
     grid-column-start: 2;

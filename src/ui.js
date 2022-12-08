@@ -1,17 +1,26 @@
 import { format } from 'date-fns';
 import tasks from './todo.js'
+import projects from './projects.js';
 
 
 const ui = (() => {
     let tasksList = document.querySelector('.task-list');
+    let projectsList = document.querySelector('#projects-list');
     let taskTitle = document.querySelector('#enter-title');
     let taskDescription = document.querySelector('#enter-description');
     let taskDue = document.querySelector('#enter-due');
+
+    
 
     function addTaskUi(){
     tasks.newTask(taskTitle.value, taskDescription.value, taskDue.value);
     form.reset();
     } 
+
+    function addProjectUi(){
+    projects.newProject(taskTitle.value);
+    form.reset();   
+    }
 
     // clear the dom to prepare for update
     const removeContent = (content) => {
@@ -104,12 +113,74 @@ const ui = (() => {
         updateUi();
     }
 
+    function editProjectUi(projectIndex){
+let newProjectTitle = taskTitle.value;
+
+let projectTargetTitle = document.querySelector([`[data-project-index="${projectIndex}"]`]).querySelector('.title-text');
+
+projects.editProject(newProjectTitle, projectIndex);
+
+projectTargetTitle.textContent = newProjectTitle;
+    }
+
+    function deleteProjectUi(projectIndex){
+        // deletes the entry from the array
+        projects.deleteProject(projectIndex);
+        console.log(projects.projectList);
+
+        //deletes entry from the dom and updates the project index 
+        removeContent(projectsList);
+        updateProjectUi();
+    }
+
+    function updateProjectUi(){
+        projectsList.textContent = '';
+
+        localStorage.setItem('projects', JSON.stringify(projects.projectList));
+
+        for (let i = 0; i < projects.projectList.length; i++){
+            let projectDiv = document.createElement('div');
+            let projectTitleText = document.createElement('p');
+            let editButton = document.createElement('div');
+            let deleteButton = document.createElement('div');
+
+            projectTitleText.textContent = projects.projectList[i].title;
+
+            projectDiv.setAttribute('data-project-index', i);
+            editButton.setAttribute('data-project-index', i);
+            deleteButton.setAttribute('data-project-index', i);
+            projectTitleText.setAttribute('data-project-index', i);
+
+            projects.projectList[i].projectIndex = parseInt(projectDiv.dataset.projectIndex);
+
+            projectDiv.classList.add('projectDiv');
+        editButton.classList.add('edit-project');
+        editButton.classList.add('edit-icon');
+        editButton.classList.add('task-icon');
+        deleteButton.classList.add('delete-project');
+        deleteButton.classList.add('delete-icon');
+        deleteButton.classList.add('task-icon');
+        projectTitleText.classList.add('title-text');
+
+        projectDiv.appendChild(projectTitleText);
+        
+        projectDiv.appendChild(editButton);
+        projectDiv.appendChild(deleteButton);
+        projectsList.appendChild(projectDiv);
+        console.log(projects.projectList);
+        }
+    }
+
     return {
         removeContent,
         updateUi,
         addTaskUi,
         editTaskUi,
         deleteUi,
+        addProjectUi,
+        editProjectUi,
+        updateProjectUi,
+        deleteProjectUi,
     };        
 })();
 

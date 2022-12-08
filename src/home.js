@@ -31,6 +31,8 @@ contentDiv.innerHTML = `
         <div class='sidebar-icon' id='projects-icon'></div>
             <p>Projects</p>
         </div>
+        <div id='projects-list'>
+            </div>
     </div>
 
     <div id='main'>
@@ -62,6 +64,7 @@ contentDiv.innerHTML = `
 
         <!-- Form Buttons -->
         <button type='submit' class='add-task' form='form'>Add Task</button>
+        <button type='submit' class='add-project' form='form'>Add Project</button>
         <button type='button' class='cancel'form='form'>Cancel</button>
     </div>
 `

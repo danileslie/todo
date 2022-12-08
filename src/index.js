@@ -5,6 +5,7 @@ import itemHandler from './itemHandler.js';
 import ui from './ui.js';
 
 ui.updateUi();
+ui.updateProjectUi();
 
 loadHome;
 itemHandler;
