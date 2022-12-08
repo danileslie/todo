@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import tasks from './todo.js'
 
+
 const ui = (() => {
     let tasksList = document.querySelector('.task-list');
     let taskTitle = document.querySelector('#enter-title');
@@ -22,9 +23,11 @@ const ui = (() => {
     // add an index to the entries to lower need to crawl through array constantly
 
     function updateUi(){
-
         // stops loop from making duplicate entries
         tasksList.textContent = '';
+
+        // save entries to local storage on change
+        localStorage.setItem('tasks', JSON.stringify(tasks.taskList));
         
     for (let i = 0; i < tasks.taskList.length; i++){
 
@@ -32,16 +35,16 @@ const ui = (() => {
         let taskTitleText = document.createElement('p');
         let taskDescriptionText = document.createElement('p');
         let taskDateText = document.createElement('p'); 
-        let editButton = document.createElement('button');
-        let deleteButton = document.createElement('button');
+        let editButton = document.createElement('div');
+        let deleteButton = document.createElement('div');
+        let favIcon = document.createElement('div');
+
+        //create visual on page and attach index after task is created
 
         taskTitleText.textContent = tasks.taskList[i].title;
         taskDescriptionText.textContent = tasks.taskList[i].description;
         taskDateText.textContent = tasks.taskList[i].date;
-        editButton.textContent='edit';
-        deleteButton.textContent='delete';
-
-        //create visual on page and attach index after task is created
+        
         taskDiv.setAttribute('data-index', i);
         editButton.setAttribute('data-index', i);
         deleteButton.setAttribute('data-index', i);
@@ -53,11 +56,18 @@ const ui = (() => {
         
         taskDiv.classList.add('taskDiv');
         editButton.classList.add('edit-task');
+        editButton.classList.add('edit-icon');
+        editButton.classList.add('task-icon');
         deleteButton.classList.add('delete-task');
+        deleteButton.classList.add('delete-icon');
+        deleteButton.classList.add('task-icon');
         taskTitleText.classList.add('title-text');
         taskDescriptionText.classList.add('description-text');
         taskDateText.classList.add('task-due');
+        favIcon.classList.add('task-icon');
+        favIcon.classList.add('important-icon');
 
+        taskDiv.appendChild(favIcon);
         taskDiv.appendChild(taskTitleText);
         taskDiv.appendChild(taskDescriptionText);
         taskDiv.appendChild(taskDateText);
@@ -83,7 +93,6 @@ const ui = (() => {
         taskTargetTitle.textContent = newTaskTitle;
         taskTargetDescription.textContent = newTaskDescription;
         taskTargetDate.textContent = newTaskDate;
-
     }
 
     function deleteUi(index){
@@ -101,10 +110,7 @@ const ui = (() => {
         addTaskUi,
         editTaskUi,
         deleteUi,
-    };
-
-
-        
+    };        
 })();
 
 export default ui;

@@ -1,9 +1,10 @@
-import { format } from "date-fns";
-import ui from './ui.js';
 
 const tasks = (()=>{
-
+    
     let taskList = [];
+
+    const loadedTasks = JSON.parse(localStorage.getItem('tasks'));
+    taskList = loadedTasks;
 
     class Task {
         constructor(title, description, date, index){
@@ -18,21 +19,17 @@ const tasks = (()=>{
     
     function newTask(title, description, date, index){
         const task = new Task(title, description, date, index);
-        taskList.push(task);  
-        ui.updateUi(); 
+        taskList.push(task);      
     } 
     
     function editTask(title, description, date, index){
         taskList[index].title = title;
         taskList[index].description = description;
-        taskList[index].date = date;
-        ui.updateUi();
+        taskList[index].date = date;   
     }
     
     function deleteTask(index){
             taskList.splice(index, 1);
-            ui.updateUi();
-            return taskList;
     }
     
     // function completeTask(){

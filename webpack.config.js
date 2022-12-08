@@ -15,6 +15,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'images/[name][ext][query]',
     clean: true,
   },
   module: {
@@ -27,6 +28,19 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
+      // {
+      //   test: /\.(png|svg|jpg|jpeg|gif)$/i, 
+      //   type: 'asset/resource'
+ 
+      // },
+      // {
+      //   test: /\.html/,
+      //   type: 'asset/resource',
+      //   generator: {
+      //     filename: 'static/[hash][ext][query]'
+      //   }
+ 
+      // }
     ],
   },
 };

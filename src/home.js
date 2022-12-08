@@ -9,21 +9,26 @@ document.body.appendChild(contentDiv);
 contentDiv.innerHTML = `
     <div id='header'>
         <div id='title'>
+            <div id='logo'></div>
             <p>Everything Is Due Forever</p>
         </div>
     </div>
 
     <div id='sidebar'>
         <div id='all'>
+        <div class='sidebar-icon' id='all-icon'></div>
             <p>All</p>
         </div>
         <div id='today'>
+        <div class='sidebar-icon' id='today-icon'></div>
             <p>Today</p>
         </div>
         <div id='important'>
+        <div class='sidebar-icon' id='important-icon'></div>
             <p>Important</p>
         </div>
         <div id='projects'>
+        <div class='sidebar-icon' id='projects-icon'></div>
             <p>Projects</p>
         </div>
     </div>
@@ -45,7 +50,7 @@ contentDiv.innerHTML = `
         <!-- Task Description -->
             <div class='description-area'>
                 <label for='enter-description'>Description</label>
-                <textarea id='enter-description' name='enter-description' required rows='5' cols='25' autocomplete='off'></textarea>
+                <textarea id='enter-description' class='box-border' name='enter-description' required rows='5' autocomplete='off'></textarea>
             </div>
 
         <!-- Due Date -->
