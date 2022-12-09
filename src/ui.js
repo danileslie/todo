@@ -6,6 +6,7 @@ import projects from './projects.js';
 const ui = (() => {
     let tasksList = document.querySelector('.task-list');
     let projectsList = document.querySelector('#projects-list');
+    let projectArea = document.querySelector('.project-area');
     let taskTitle = document.querySelector('#enter-title');
     let taskDescription = document.querySelector('#enter-description');
     let taskDue = document.querySelector('#enter-due');
@@ -115,21 +116,20 @@ const ui = (() => {
 
     function editProjectUi(projectIndex){
 let newProjectTitle = taskTitle.value;
-
 let projectTargetTitle = document.querySelector([`[data-project-index="${projectIndex}"]`]).querySelector('.title-text');
 
 projects.editProject(newProjectTitle, projectIndex);
-
 projectTargetTitle.textContent = newProjectTitle;
     }
 
     function deleteProjectUi(projectIndex){
+        let projectsSelection = document.querySelector('.selectContainer');
         // deletes the entry from the array
         projects.deleteProject(projectIndex);
-        console.log(projects.projectList);
 
         //deletes entry from the dom and updates the project index 
         removeContent(projectsList);
+        removeContent(projectsSelection);
         updateProjectUi();
     }
 
@@ -153,7 +153,7 @@ projectTargetTitle.textContent = newProjectTitle;
 
             projects.projectList[i].projectIndex = parseInt(projectDiv.dataset.projectIndex);
 
-            projectDiv.classList.add('projectDiv');
+        projectDiv.classList.add('projectDiv');
         editButton.classList.add('edit-project');
         editButton.classList.add('edit-icon');
         editButton.classList.add('task-icon');
@@ -167,10 +167,41 @@ projectTargetTitle.textContent = newProjectTitle;
         projectDiv.appendChild(editButton);
         projectDiv.appendChild(deleteButton);
         projectsList.appendChild(projectDiv);
-        console.log(projects.projectList);
-        }
     }
 
+        // test adding select at project creation
+
+        let taskForm = document.querySelector('.task-form');
+        
+        // let projectTitle = document.createElement('div');
+        let projectLabel = document.createElement('label');
+        let projectSelect = document.createElement('select');
+
+        projectArea.textContent = '';
+
+        projectArea.classList.add('selectContainer');
+        projectLabel.setAttribute('for', 'projects-select');
+        projectLabel.textContent = 'Project';
+        projectSelect.setAttribute('name', 'projects-select');
+        projectSelect.setAttribute('id', 'projects-select');
+        projectSelect.setAttribute('form', 'form');
+        // projectSelect.setAttribute('data-project-index', `${projectIndex}`);
+        
+
+        //create select values through project list entries
+
+        for (let i = 0; i < projects.projectList.length; i++){
+            let projectOption = document.createElement('option');
+            projectOption.value = projects.projectList[i].title;
+            projectOption.textContent = projects.projectList[i].title;
+            projectOption.setAttribute('data-project-index', projects.projectList[i].projectIndex );
+            projectSelect.appendChild(projectOption);
+            projectArea.appendChild(projectLabel);
+            projectArea.appendChild(projectSelect);
+            taskForm.appendChild(projectArea);     
+        }
+        
+    }
     return {
         removeContent,
         updateUi,
@@ -181,6 +212,7 @@ projectTargetTitle.textContent = newProjectTitle;
         editProjectUi,
         updateProjectUi,
         deleteProjectUi,
+        // createProjectSelect,
     };        
 })();
 

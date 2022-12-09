@@ -60,11 +60,16 @@ contentDiv.innerHTML = `
                 <label for='task-due'>Due Date</label>
                 <input id='enter-due' id='enter-due' name='enter-due' required type='date'>
             </div>
+
+        <!-- Project Selection -->
+            <div class='project-area'>
+
+            </div>
         </form>
 
         <!-- Form Buttons -->
         <button type='submit' class='add-task' form='form'>Add Task</button>
-        <button type='submit' class='add-project' form='form'>Add Project</button>
+        <button type='button' class='add-project' form='form'>Add Project</button>
         <button type='button' class='cancel'form='form'>Cancel</button>
     </div>
 `

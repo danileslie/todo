@@ -46,6 +46,7 @@ const itemHandlers = (() => {
     if (target.classList.contains('delete-project')){
         projectIndex = parseInt(target.dataset.projectIndex);
         ui.deleteProjectUi(projectIndex);
+        ui.updateUi();
     }
     });
 })();
