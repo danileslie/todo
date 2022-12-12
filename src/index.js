@@ -4,8 +4,9 @@ import loadHome from './home.js';
 import itemHandler from './itemHandler.js';
 import ui from './ui.js';
 
-ui.updateUi();
 ui.updateProjectUi();
+ui.updateUi();
+
 
 loadHome;
 itemHandler;

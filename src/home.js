@@ -42,7 +42,7 @@ contentDiv.innerHTML = `
     <footer id='footer'>Dummy footer content</footer>
 
     <div class='task-form'>
-        <form id='form' name='form' method='get'>
+        <form name='form' method='get'>
         <!-- Task Title -->
             <div class='title-area'>
                 <label for='enter-title'>Title</label>
@@ -70,7 +70,7 @@ contentDiv.innerHTML = `
         <!-- Form Buttons -->
         <button type='submit' class='add-task' form='form'>Add Task</button>
         <button type='button' class='add-project' form='form'>Add Project</button>
-        <button type='button' class='cancel'form='form'>Cancel</button>
+        <button type='button' class='cancel' form='form'>Cancel</button>
     </div>
 `
 

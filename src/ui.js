@@ -10,10 +10,10 @@ const ui = (() => {
     let taskTitle = document.querySelector('#enter-title');
     let taskDescription = document.querySelector('#enter-description');
     let taskDue = document.querySelector('#enter-due');
-
     
+    let selectedIndex;
 
-    function addTaskUi(){
+    function addTaskUi(){ 
     tasks.newTask(taskTitle.value, taskDescription.value, taskDue.value);
     form.reset();
     } 
@@ -36,9 +36,11 @@ const ui = (() => {
         // stops loop from making duplicate entries
         tasksList.textContent = '';
 
+        let projectsSelect = document.getElementById('projects-select');
+
         // save entries to local storage on change
         localStorage.setItem('tasks', JSON.stringify(tasks.taskList));
-        
+
     for (let i = 0; i < tasks.taskList.length; i++){
 
         let taskDiv = document.createElement('div');
@@ -54,6 +56,8 @@ const ui = (() => {
         taskTitleText.textContent = tasks.taskList[i].title;
         taskDescriptionText.textContent = tasks.taskList[i].description;
         taskDateText.textContent = tasks.taskList[i].date;
+
+        selectedIndex = projectsSelect.options[projectsSelect.selectedIndex].dataset.projectIndex;
         
         taskDiv.setAttribute('data-index', i);
         editButton.setAttribute('data-index', i);
@@ -63,6 +67,7 @@ const ui = (() => {
         taskDateText.setAttribute('data-index', i);
         
         tasks.taskList[i].index = parseInt(taskDiv.dataset.index);
+        tasks.taskList[i].projectIndex = parseInt(selectedIndex);
         
         taskDiv.classList.add('taskDiv');
         editButton.classList.add('edit-task');
@@ -83,8 +88,9 @@ const ui = (() => {
         taskDiv.appendChild(taskDateText);
         taskDiv.appendChild(editButton);
         taskDiv.appendChild(deleteButton);
-        tasksList.appendChild(taskDiv);
+        tasksList.appendChild(taskDiv);      
     }
+    console.log(tasks.taskList);
     }
 
     function editTaskUi(index){
@@ -173,7 +179,6 @@ projectTargetTitle.textContent = newProjectTitle;
 
         let taskForm = document.querySelector('.task-form');
         
-        // let projectTitle = document.createElement('div');
         let projectLabel = document.createElement('label');
         let projectSelect = document.createElement('select');
 
@@ -185,7 +190,6 @@ projectTargetTitle.textContent = newProjectTitle;
         projectSelect.setAttribute('name', 'projects-select');
         projectSelect.setAttribute('id', 'projects-select');
         projectSelect.setAttribute('form', 'form');
-        // projectSelect.setAttribute('data-project-index', `${projectIndex}`);
         
 
         //create select values through project list entries
@@ -194,7 +198,7 @@ projectTargetTitle.textContent = newProjectTitle;
             let projectOption = document.createElement('option');
             projectOption.value = projects.projectList[i].title;
             projectOption.textContent = projects.projectList[i].title;
-            projectOption.setAttribute('data-project-index', projects.projectList[i].projectIndex );
+            projectOption.setAttribute('data-project-index', projects.projectList[i].projectIndex);
             projectSelect.appendChild(projectOption);
             projectArea.appendChild(projectLabel);
             projectArea.appendChild(projectSelect);
@@ -212,7 +216,6 @@ projectTargetTitle.textContent = newProjectTitle;
         editProjectUi,
         updateProjectUi,
         deleteProjectUi,
-        // createProjectSelect,
     };        
 })();
 
