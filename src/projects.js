@@ -8,7 +8,6 @@ const projects = (() => {
             constructor(title, projectIndex){
                 this.title = title;
                 this.projectIndex = projectIndex;
-                this.tasks = [];
             }
         }
 

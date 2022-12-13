@@ -12,8 +12,9 @@ const itemHandlers = (() => {
 
     // adding task
     if (target.classList.contains('add-task')){
-        // projectIndex = parseInt(target.dataset.projectIndex);
+        // projectIndex = (target.dataset.projectIndex);
          ui.addTaskUi(); 
+        //  ui.updateProjectIndex();
          ui.updateUi();      
     }
 
