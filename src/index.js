@@ -3,9 +3,10 @@ import './style.css';
 import loadHome from './home.js';
 import itemHandler from './itemHandler.js';
 import ui from './ui.js';
+import tasks from './todo';
 
 ui.updateProjectUi();
-ui.updateUi();
+ui.testUpdateUi(tasks.taskList);
 
 
 
