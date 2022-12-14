@@ -50,6 +50,11 @@ const itemHandlers = (() => {
         ui.deleteProjectUi(projectIndex);
         ui.updateUi();
     }
+
+    if(target.classList.contains('projectDiv')){
+        projectIndex = parseInt(target.dataset.projectIndex);
+        ui.testFilter(projectIndex);
+    }
     });
 })();
 

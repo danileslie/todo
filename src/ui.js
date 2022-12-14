@@ -160,7 +160,6 @@ const ui = (() => {
         //changes project index in dom
 
         editTask.setAttribute('data-project-index', tasks.taskList[index].projectIndex);
-        console.log(editTask);
     
     }
 
@@ -228,6 +227,17 @@ const ui = (() => {
         projectsList.appendChild(projectDiv);
     }        
     }
+
+    function testFilter(projectIndex){
+        let sidebarFilter = tasks.taskList.filter((tasks) => {
+            return tasks.projectIndex === projectIndex; 
+        });
+
+        console.log(projects.projectList[projectIndex]);
+        console.log(sidebarFilter);
+        // console.log(tasks.taskList);
+    }
+
     return {
         removeContent,
         updateUi,
@@ -238,6 +248,7 @@ const ui = (() => {
         editProjectUi,
         updateProjectUi,
         deleteProjectUi,
+        testFilter,
  
     };        
 })();

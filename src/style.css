@@ -130,3 +130,7 @@ input, textarea{
     padding: 0.5rem;
 }
 
+.projectDiv{
+    display: flex;
+    border: 2px solid red;
+}
