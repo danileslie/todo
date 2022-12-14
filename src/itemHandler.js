@@ -73,8 +73,7 @@ const itemHandlers = (() => {
     }
 
     if (target.id === 'important') {
-        ui.filterImportant();
-        ui.testUpdateUi(tasks.taskList);
+        ui.filterImportant(tasks.taskList);
     }
     });
 })();

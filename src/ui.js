@@ -213,8 +213,6 @@ const ui = (() => {
         taskDiv.appendChild(editButton);
         taskDiv.appendChild(deleteButton);
         tasksList.appendChild(taskDiv); 
-
-        console.log(tasks.taskList);
             });
     }
 
@@ -330,7 +328,6 @@ testUpdateUi(sidebarFilter);
             let todaysDate = format(new Date(), 'yyyy-MM-dd')
             return tasks.date === todaysDate;
         });
-console.log(dateFilter);
 testUpdateUi(dateFilter);     
     }
 
@@ -338,7 +335,8 @@ testUpdateUi(dateFilter);
             let importantFilter = tasks.taskList.filter((tasks) => {
                 return tasks.important === true;
             })
-            testUpdateUi(importantFilter);
+        testUpdateUi(importantFilter);
+        console.log(importantFilter);
     }
 
     function importantToggle(index){
@@ -350,6 +348,8 @@ testUpdateUi(dateFilter);
 let favIcon = document.querySelector([`[data-index="${index}"]`]).querySelector('.important-icon');
 
         favIcon.classList.toggle('fav-important');
+
+        testUpdateUi(tasks.taskList);
     }
 
 
