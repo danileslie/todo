@@ -1,12 +1,11 @@
-import _ from 'lodash';
 import './style.css';
-import loadHome from './home.js';
-import itemHandler from './itemHandler.js';
-import ui from './ui.js';
+import loadHome from './home';
+import itemHandler from './itemHandler';
+import ui from './ui';
 import tasks from './todo';
 
 ui.updateProjectUi();
-ui.testUpdateUi(tasks.taskList);
+ui.UpdateUi(tasks.taskList);
 
 
 

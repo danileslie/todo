@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Rubik:wght@300;500;600&display=swap');
+
 :root{
     --dark-purple: #7F669D;
     --pale-purple: #BA94D1;
@@ -9,10 +11,10 @@
 
 }
 
-
 body{
     margin: 0;
     padding: 0;
+    font-family: 'Alata';
 }
 
 #content{
@@ -25,6 +27,12 @@ body{
 #header{
     grid-column: 2;
     background: var(--pink);
+    border-bottom: 2px solid black;
+}
+
+#title > p {
+font-size: 50px;
+margin: 10px 0 ;
 }
 
 #sidebar{
@@ -62,6 +70,8 @@ body{
   width: 5rem;
   background-repeat: no-repeat;
   background-size: contain;
+  transform: rotate(-15deg);
+  margin: 0 0.5%;
 }
 
 .sidebar-icon{

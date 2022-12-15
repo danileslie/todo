@@ -1,6 +1,7 @@
 
 const loadHome = (() => {
-//default page setup
+    
+// default page setup
 
 const contentDiv = document.createElement('div');
 contentDiv.setAttribute('id', 'content');

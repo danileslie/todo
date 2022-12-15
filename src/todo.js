@@ -23,6 +23,7 @@ const tasks = (()=>{
         taskList.push(task);      
     } 
     
+    // eslint-disable-next-line no-unused-vars
     function editTask(title, description, date, index, projectIndex){
         taskList[index].title = title;
         taskList[index].description = description;
