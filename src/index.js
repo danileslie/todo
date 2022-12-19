@@ -5,12 +5,11 @@ import ui from './ui';
 import tasks from './todo';
 
 ui.updateProjectUi();
-ui.UpdateUi(tasks.taskList);
-
-
+ui.updateUi(tasks.taskList);
 
 loadHome;
 itemHandler;
+
 
 
 

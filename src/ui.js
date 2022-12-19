@@ -13,6 +13,7 @@ const ui = (() => {
     const taskTitle = document.querySelector('#enter-title');
     const taskDescription = document.querySelector('#enter-description');
     const taskDue = document.querySelector('#enter-due');
+    const form = document.querySelector('form');
 
 
 
@@ -25,111 +26,15 @@ const ui = (() => {
 
     function addTask() {
         tasks.newTask(taskTitle.value, taskDescription.value, taskDue.value);
+        form.reset();
     }
 
     function addProject() {
         projects.newProject(taskTitle.value);
+        form.reset();
     }
 
-    // add an index to the entries to lower need to crawl through array constantly
-
-    // function updateUi(){
-    //     // stops loop from making duplicate entries
-    //     tasksList.textContent = '';
-
-    //     // save entries to local storage on change
-    //     localStorage.setItem('tasks', JSON.stringify(tasks.taskList));
-
-    // for (let i = 0; i < tasks.taskList.length; i++){
-    //     let taskDiv = document.createElement('div');
-    //     let taskTitleText = document.createElement('p');
-    //     let taskDescriptionText = document.createElement('p');
-    //     let taskDateText = document.createElement('p'); 
-    //     let editButton = document.createElement('div');
-    //     let deleteButton = document.createElement('div');
-    //     let favIcon = document.createElement('div');
-
-    //     //create visual on page and attach index after task is created
-
-    //     taskTitleText.textContent = tasks.taskList[i].title;
-    //     taskDescriptionText.textContent = tasks.taskList[i].description;
-    //     taskDateText.textContent = tasks.taskList[i].date;
-
-    //     taskDiv.setAttribute('data-index', i);
-    //     editButton.setAttribute('data-index', i);
-    //     deleteButton.setAttribute('data-index', i);
-    //     taskTitleText.setAttribute('data-index', i);
-    //     taskDescriptionText.setAttribute('data-index', i);
-    //     taskDateText.setAttribute('data-index', i);
-
-    //     taskDiv.setAttribute('data-project-index', tasks.taskList[i].projectIndex);
-    //     editButton.setAttribute('data-project-index', tasks.taskList[i].projectIndex);
-    //     deleteButton.setAttribute('data-project-index', tasks.taskList[i].projectIndex);
-    //     taskTitleText.setAttribute('data-project-index', tasks.taskList[i].projectIndex);
-    //     taskDescriptionText.setAttribute('data-project-index', tasks.taskList[i].projectIndex);
-    //     taskDateText.setAttribute('data-project-index', tasks.taskList[i].projectIndex);
-
-    //     tasks.taskList[i].index = parseInt(taskDiv.dataset.index);
-
-
-    //     taskDiv.classList.add('task-div');
-    //     editButton.classList.add('edit-task');
-    //     editButton.classList.add('edit-icon');
-    //     editButton.classList.add('task-icon');
-    //     deleteButton.classList.add('delete-task');
-    //     deleteButton.classList.add('delete-icon');
-    //     deleteButton.classList.add('task-icon');
-    //     taskTitleText.classList.add('title-text');
-    //     taskDescriptionText.classList.add('description-text');
-    //     taskDateText.classList.add('task-due');
-    //     favIcon.classList.add('task-icon');
-    //     favIcon.classList.add('important-icon');
-
-    //     //add projects list to task div
-
-    //     let projectLabel = document.createElement('label');
-    //     let projectSelect = document.createElement('select');
-    //     let projectArea = document.createElement('div');
-
-    //     projectArea.textContent = '';
-
-    //     projectArea.classList.add('projectArea');
-    //     projectArea.classList.add('selectContainer');
-    //     projectLabel.setAttribute('for', 'projects-select');
-    //     projectLabel.textContent = 'Project';
-    //     projectSelect.setAttribute('name', 'projects-select');
-    //     projectSelect.setAttribute('id', 'projects-select');
-    //     projectSelect.setAttribute('form', 'form');
-
-    //     //create select values through project list entries
-
-    //     for (let j = 0; j < projects.projectList.length; j++){
-    //         let projectOption = document.createElement('option');
-    //         projectOption.value = projects.projectList[j].title;
-    //         projectOption.textContent = projects.projectList[j].title;
-    //         projectOption.setAttribute('data-project-index', j);
-    //         projectSelect.appendChild(projectOption);
-    //         projectArea.appendChild(projectLabel);
-    //         projectArea.appendChild(projectSelect);    
-    //     }
-
-    //     //end project section
-
-    //     taskDiv.appendChild(projectArea);
-
-    //     taskDiv.appendChild(favIcon);
-    //     taskDiv.appendChild(taskTitleText);
-    //     taskDiv.appendChild(taskDescriptionText);
-    //     taskDiv.appendChild(taskDateText);
-    //     taskDiv.appendChild(editButton);
-    //     taskDiv.appendChild(deleteButton);
-    //     tasksList.appendChild(taskDiv);  
-
-    // }  
-    // console.log(tasks.taskList);     
-    // }
-
-    const UpdateUi = (taskList) => {
+    const updateUi = (taskList) => {
 
         // stops loop from making duplicate entries
         tasksList.textContent = '';
@@ -145,6 +50,7 @@ const ui = (() => {
             const editButton = document.createElement('div');
             const deleteButton = document.createElement('div');
             const favIcon = document.createElement('div');
+            const checkBox = document.createElement('input');
 
             // create visual on page and attach index after task is created
 
@@ -159,8 +65,20 @@ const ui = (() => {
             taskDescriptionText.setAttribute('data-index', `${taskList.indexOf(task)}`);
             taskDateText.setAttribute('data-index', `${taskList.indexOf(task)}`);
             favIcon.setAttribute('data-index', `${taskList.indexOf(task)}`);
+            checkBox.setAttribute('type', 'checkbox');
+            checkBox.setAttribute('data-index', `${taskList.indexOf(task)}`);
 
             task.index = parseInt(taskDiv.dataset.index, 10);
+
+            // checking status of completed and favourited tasks
+
+            if(task.completed === true) {
+                taskDiv.classList.add('complete');
+            }
+
+            if(task.important === true) {
+                favIcon.classList.add('fav-important');
+            }
 
             taskDiv.classList.add('task-div');
             editButton.classList.add('edit-task');
@@ -174,6 +92,7 @@ const ui = (() => {
             taskDateText.classList.add('task-due');
             favIcon.classList.add('task-icon');
             favIcon.classList.add('important-icon');
+            checkBox.classList.add('check-task');
 
             // adding projects to taskDiv
 
@@ -212,6 +131,7 @@ const ui = (() => {
 
             taskDiv.appendChild(projectArea);
             taskDiv.appendChild(favIcon);
+            taskDiv.appendChild(checkBox);
             taskDiv.appendChild(taskTitleText);
             taskDiv.appendChild(taskDescriptionText);
             taskDiv.appendChild(taskDateText);
@@ -219,6 +139,7 @@ const ui = (() => {
             taskDiv.appendChild(deleteButton);
             tasksList.appendChild(taskDiv);
         });
+        
     }
 
     function editTaskUi(index) {
@@ -256,7 +177,7 @@ const ui = (() => {
 
         // deletes entry from the dom and updates the index       
         removeContent(tasksList);
-        UpdateUi(tasks.taskList);
+        updateUi(tasks.taskList);
     }
 
     function editProjectUi(projectIndex) {
@@ -265,11 +186,12 @@ const ui = (() => {
 
         const projectTargetTitle = document.querySelector([`[data-project-index='${projectIndex}']`]).querySelector('.title-text');
 
+        // change project in array
+        projects.projectList.title = taskTitle.value;
+
         // changes the project on the dom
         const newProjectTitle = taskTitle.value;
-        projectTargetTitle.textContent = newProjectTitle;
-
-        // changes project index in dom
+        projectTargetTitle.textContent = newProjectTitle; 
         projects.editProject(newProjectTitle, projectIndex);
     }
 
@@ -326,43 +248,44 @@ const ui = (() => {
 
     // section for sidebar filters
     
-    function testFilter(criteria) {
-
+    function projectFilter(projectIndex) {
         // filter tasks in the array
-        const sidebarFilter = tasks.taskList.filter((task) => task.projectIndex === criteria);
-        UpdateUi(sidebarFilter);
+        const sidebarFilter = tasks.taskList.filter((task) => task.projectIndex === projectIndex);
+        updateUi(sidebarFilter);
     }
 
-    const filterToday = () => {
+    const todayFilter = () => {
         const dateFilter = tasks.taskList.filter((task) => {
             const todaysDate = format(new Date(), 'yyyy-MM-dd')
             return task.date === todaysDate;
         });
-        UpdateUi(dateFilter);
+        updateUi(dateFilter);
     }
 
-    const filterImportant = () => {
-        const importantFilter = tasks.taskList.filter((task) => task.important === true)
-        UpdateUi(importantFilter);
+    const importantFilter = () => {
+        const favFilter = tasks.taskList.filter((task) => task.important === true)
+        updateUi(favFilter);
     }
 
     function importantToggle(index) {
 
         // toggle importance in array
         tasks.taskList[index].important = !tasks.taskList[index].important;
+        
+        updateUi(tasks.taskList);
+    }
 
-        // toggle importance in dom
-        const favIcon = document.querySelector([`[data-index='${index}']`]).querySelector('.important-icon');
+    function completeToggle(index) {
 
-        favIcon.classList.toggle('fav-important');
-
-        UpdateUi(tasks.taskList);
+        // toggle completion in array
+        tasks.taskList[index].completed = !tasks.taskList[index].completed;
+        updateUi(tasks.taskList);
     }
 
 
     return {
         removeContent,
-        UpdateUi,
+        updateUi,
         addTask,
         editTaskUi,
         deleteUi,
@@ -370,10 +293,12 @@ const ui = (() => {
         editProjectUi,
         updateProjectUi,
         deleteProjectUi,
-        testFilter,
-        filterToday,
+        projectFilter,
+        todayFilter,
         importantToggle,
-        filterImportant,
+        importantFilter,
+        completeToggle,
+
 
     };
 })();

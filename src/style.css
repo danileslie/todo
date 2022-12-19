@@ -64,6 +64,17 @@ margin: 10px 0 ;
     align-items: center;
 }
 
+.task-div #projects-select{
+    border: none;
+    
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.projectArea{
+    padding: 0.5%;
+}
+
 #logo{
     background-image: url('./images/favourite-book.svg');
   height: 5rem;
@@ -134,7 +145,7 @@ background-image: url('./images/star-outline.svg');
     display: block;
 }
 
-input, textarea{
+form > input, textarea{
     width: 100%;
     margin-bottom: 1rem;
     padding: 0.5rem;
@@ -143,4 +154,8 @@ input, textarea{
 .projectDiv{
     display: flex;
     border: 2px solid red;
+}
+
+.fav-important{
+    filter: invert(93%) sepia(18%) saturate(1025%) hue-rotate(7deg) brightness(103%) contrast(92%);
 }

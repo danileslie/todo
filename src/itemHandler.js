@@ -11,10 +11,9 @@ const itemHandlers = (() => {
 
     // adding task
     if (target.classList.contains('add-task')){
-        // projectIndex = (target.dataset.projectIndex);
          ui.addTask(); 
-        //  ui.updateProjectIndex();
-         ui.UpdateUi(tasks.taskList);      
+        tasks.sortByDate(tasks.taskList);
+         ui.updateUi(tasks.taskList);         
     }
 
     // editing task
@@ -22,40 +21,44 @@ const itemHandlers = (() => {
     // grabbing index here so i can work with it from a different file
     index = parseInt(target.dataset.index, 10);
     ui.editTaskUi(index);
-    ui.UpdateUi(tasks.taskList);   
+    ui.updateUi(tasks.taskList);   
     }
 
     // deleting task
     if (target.classList.contains('delete-task')){
         index = parseInt(target.dataset.index, 10);
         ui.deleteUi(index);
-        ui.UpdateUi(tasks.taskList);         
+        ui.updateUi(tasks.taskList);         
     }
 
     // adding project
     if(target.classList.contains('add-project')){
         ui.addProject();
         ui.updateProjectUi();
-        ui.UpdateUi(tasks.taskList);
+        ui.updateUi(tasks.taskList);
     }
 
     if (target.classList.contains('important-icon')){
         index = parseInt(target.dataset.index, 10);
         ui.importantToggle(index);
-
     }
+
+        if (target.classList.contains('check-task')){
+            index = parseInt(target.dataset.index, 10);
+            ui.completeToggle(index);
+        }
 
     if (target.classList.contains('edit-project')){
         projectIndex = parseInt(target.dataset.projectIndex, 10);
         ui.editProjectUi(projectIndex);
         ui.updateProjectUi();
-        ui.UpdateUi(tasks.taskList);
+        ui.updateUi(tasks.taskList);
     }
 
     if (target.classList.contains('delete-project')){
         projectIndex = parseInt(target.dataset.projectIndex, 10);
         ui.deleteProjectUi(projectIndex);
-        ui.UpdateUi(tasks.taskList);
+        ui.updateUi(tasks.taskList);
     }
 
     if(target.classList.contains('projectDiv')){
@@ -64,14 +67,14 @@ const itemHandlers = (() => {
     }
 
     if (target.id === 'all'){
-        ui.UpdateUi(tasks.taskList);
+        ui.updateUi(tasks.taskList);
     }
     if(target.id === 'today'){
-        ui.filterToday(tasks.taskList);
+        ui.todayFilter(tasks.taskList);
     }
 
     if (target.id === 'important') {
-        ui.filterImportant(tasks.taskList);
+        ui.importantFilter(tasks.taskList);
     }
     });
 })();

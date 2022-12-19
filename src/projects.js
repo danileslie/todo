@@ -3,6 +3,7 @@ const projects = (() => {
         let projectList = [];
 
         const loadedProjects = JSON.parse(localStorage.getItem('projects'));
+        
     projectList = loadedProjects;
         class Project {
             constructor(title, projectIndex){
@@ -25,6 +26,7 @@ const projects = (() => {
     }
 return {
     projectList,
+    loadedProjects,
     newProject,
     editProject,
     deleteProject,
