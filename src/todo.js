@@ -1,45 +1,9 @@
-import projects from './projects';
-
 const tasks = (()=>{
 
-    // move this later so project list doesnt need to be imported here 
     let taskList = [];
 
-    // load a default set of tasks and projects if there is nothing in localstorage
-
-    
     const loadedTasks = JSON.parse(localStorage.getItem('tasks'));
-
-    if (loadedTasks.length === 0 && projects.loadedProjects.length === 0){
-        taskList = [
-            {
-                title: 'test title',
-                description: 'test description',
-                date: '2022-12-22',
-                important: false,
-                completed: false,
-                projectIndex: '0',
-            }, 
-            {
-                title: 'test title 2 ',
-                description: 'test description 2',
-                date: '2022-12-23',
-                important: false,
-                completed: false, 
-                projectIndex: '0', 
-            },
-        ]
-
-        projects.projectList = [
-            {
-                title: 'example project',
-            },
-        ];
-    } else {
-        
-        taskList = loadedTasks;
-        projects.projectList = projects.loadedProjects;
-    }
+    taskList = loadedTasks;
 
     class Task {
         constructor(title, description, date, index, projectIndex){

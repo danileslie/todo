@@ -57,11 +57,19 @@ margin: 10px 0 ;
     background: var(--pale-orange);
 }
 
+.task-list{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
 .task-div{
     border: 2px solid red;
     margin: 0.3%;
     display: flex;
     align-items: center;
+    width: 75%;
 }
 
 .task-div #projects-select{
@@ -159,3 +167,26 @@ form > input, textarea{
 .fav-important{
     filter: invert(93%) sepia(18%) saturate(1025%) hue-rotate(7deg) brightness(103%) contrast(92%);
 }
+
+.task-left{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    gap: 1rem;
+}
+
+.task-right{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+    gap: 1rem;
+}
+
+
+input[type=checkbox]{
+    width: 20px;
+    height: 20px;
+    border: 2px solid yellow;
+}
+

@@ -50,6 +50,8 @@ const ui = (() => {
             const editButton = document.createElement('div');
             const deleteButton = document.createElement('div');
             const favIcon = document.createElement('div');
+            const taskLeft = document.createElement('div');
+            const taskRight = document.createElement('div');
             const checkBox = document.createElement('input');
 
             // create visual on page and attach index after task is created
@@ -67,6 +69,7 @@ const ui = (() => {
             favIcon.setAttribute('data-index', `${taskList.indexOf(task)}`);
             checkBox.setAttribute('type', 'checkbox');
             checkBox.setAttribute('data-index', `${taskList.indexOf(task)}`);
+            
 
             task.index = parseInt(taskDiv.dataset.index, 10);
 
@@ -93,6 +96,8 @@ const ui = (() => {
             favIcon.classList.add('task-icon');
             favIcon.classList.add('important-icon');
             checkBox.classList.add('check-task');
+            taskLeft.classList.add('task-left');
+            taskRight.classList.add('task-right');
 
             // adding projects to taskDiv
 
@@ -114,29 +119,42 @@ const ui = (() => {
 
             // create options values through project list entries
 
-            projects.projectList.forEach((project) => {
+            const defaultOption = document.createElement('option');
 
+           
+
+            projects.projectList.forEach((project) => {
+                
                 const projectOption = document.createElement('option');
                 projectOption.value = project.title;
                 projectOption.textContent = project.title;
 
+                
+                defaultOption.value = 'No Project';
+                defaultOption.text = 'No Project';
+
+              
                 projectOption.setAttribute('data-project-index', `${projects.projectList.indexOf(project)}`);
 
+                projectSelect.appendChild(defaultOption);
                 projectSelect.appendChild(projectOption);
                 projectArea.appendChild(projectLabel);
                 projectArea.appendChild(projectSelect);
+                projectSelect.add(defaultOption, 0);
             })
 
             // append to container
 
-            taskDiv.appendChild(projectArea);
-            taskDiv.appendChild(favIcon);
-            taskDiv.appendChild(checkBox);
-            taskDiv.appendChild(taskTitleText);
-            taskDiv.appendChild(taskDescriptionText);
-            taskDiv.appendChild(taskDateText);
-            taskDiv.appendChild(editButton);
-            taskDiv.appendChild(deleteButton);
+            taskLeft.appendChild(projectArea)
+            taskLeft.appendChild(checkBox);
+            taskLeft.appendChild(favIcon);
+            taskLeft.appendChild(taskTitleText);
+            taskRight.appendChild(taskDescriptionText);
+            taskRight.appendChild(taskDateText);
+            taskRight.appendChild(editButton);
+            taskRight.appendChild(deleteButton);
+            taskDiv.appendChild(taskLeft);
+            taskDiv.appendChild(taskRight);
             tasksList.appendChild(taskDiv);
         });
         
@@ -177,7 +195,6 @@ const ui = (() => {
 
         // deletes entry from the dom and updates the index       
         removeContent(tasksList);
-        updateUi(tasks.taskList);
     }
 
     function editProjectUi(projectIndex) {
@@ -187,15 +204,16 @@ const ui = (() => {
         const projectTargetTitle = document.querySelector([`[data-project-index='${projectIndex}']`]).querySelector('.title-text');
 
         // change project in array
-        projects.projectList.title = taskTitle.value;
+        // projects.projectList[projectIndex].title = taskTitle.value;
+        console.log(typeof projects.projectList[projectIndex].projectIndex);
 
         // changes the project on the dom
         const newProjectTitle = taskTitle.value;
         projectTargetTitle.textContent = newProjectTitle; 
-        projects.editProject(newProjectTitle, projectIndex);
+        // projects.editProject(newProjectTitle, projectIndex);
     }
 
-    function updateProjectUi() {
+    const updateProjectUi = (projectList) => {
 
         // stops loop from making duplicate entries
         projectsList.textContent = '';
@@ -203,7 +221,8 @@ const ui = (() => {
         // save entries to local storage on change
         localStorage.setItem('projects', JSON.stringify(projects.projectList));
 
-        for (let i = 0; i < projects.projectList.length; i++) {
+        projectList.forEach((project) =>  {
+        
             const projectDiv = document.createElement('div');
             const projectTitleText = document.createElement('p');
             const editButton = document.createElement('div');
@@ -211,14 +230,14 @@ const ui = (() => {
 
             // create visual on page and attach index after project is created
 
-            projectTitleText.textContent = projects.projectList[i].title;
+            projectTitleText.textContent = project.title;
 
-            projectDiv.setAttribute('data-project-index', i);
-            editButton.setAttribute('data-project-index', i);
-            deleteButton.setAttribute('data-project-index', i);
-            projectTitleText.setAttribute('data-project-index', i);
+            projectDiv.setAttribute('data-project-index', `${projectList.indexOf(project)}`);
+            editButton.setAttribute('data-project-index', `${projectList.indexOf(project)}`);
+            deleteButton.setAttribute('data-project-index', `${projectList.indexOf(project)}`);
+            projectTitleText.setAttribute('data-project-index', `${projectList.indexOf(project)}`);
 
-            projects.projectList[i].projectIndex = parseInt(projectDiv.dataset.projectIndex, 10);
+            project.projectIndex = parseInt(projectDiv.dataset.projectIndex, 10);
 
             projectDiv.classList.add('projectDiv');
             editButton.classList.add('edit-project');
@@ -233,16 +252,22 @@ const ui = (() => {
             projectDiv.appendChild(editButton);
             projectDiv.appendChild(deleteButton);
             projectsList.appendChild(projectDiv);
+
+            
+        });
+          
         }
-    }
+    
 
     function deleteProjectUi(projectIndex) {
         // deletes the entry from the array
         projects.deleteProject(projectIndex);
+        console.log(projects.projectList);
+        // console.log(projects.projectList.splice(projectIndex, 1));
 
         // deletes entry from the dom and updates the project index 
-        removeContent(projectsList);
-        updateProjectUi();
+        // removeContent(projectsList);
+        // updateProjectUi(projects.projectList);
     }
 
 

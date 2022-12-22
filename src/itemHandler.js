@@ -1,5 +1,6 @@
 import ui from './ui';
 import tasks from './todo';
+import projects from './projects';
 
 const itemHandlers = (() => {
     let index;
@@ -34,8 +35,21 @@ const itemHandlers = (() => {
     // adding project
     if(target.classList.contains('add-project')){
         ui.addProject();
-        ui.updateProjectUi();
+        ui.updateProjectUi(projects.projectList);
         ui.updateUi(tasks.taskList);
+    }
+
+    if (target.classList.contains('edit-project')){
+        projectIndex = parseInt(target.dataset.projectIndex, 10);
+        ui.editProjectUi(projectIndex);
+        ui.updateProjectUi(projects.projectList);
+        ui.updateUi(tasks.taskList);
+    }
+
+    if (target.classList.contains('delete-project')){
+        projectIndex = parseInt(target.dataset.projectIndex, 10);
+        ui.deleteProjectUi(projectIndex);
+        ui.updateProjectUi(projects.projectList);
     }
 
     if (target.classList.contains('important-icon')){
@@ -48,22 +62,9 @@ const itemHandlers = (() => {
             ui.completeToggle(index);
         }
 
-    if (target.classList.contains('edit-project')){
-        projectIndex = parseInt(target.dataset.projectIndex, 10);
-        ui.editProjectUi(projectIndex);
-        ui.updateProjectUi();
-        ui.updateUi(tasks.taskList);
-    }
-
-    if (target.classList.contains('delete-project')){
-        projectIndex = parseInt(target.dataset.projectIndex, 10);
-        ui.deleteProjectUi(projectIndex);
-        ui.updateUi(tasks.taskList);
-    }
-
     if(target.classList.contains('projectDiv')){
         projectIndex = parseInt(target.dataset.projectIndex, 10);
-        ui.testFilter(projectIndex);
+        ui.projectFilter(projectIndex);
     }
 
     if (target.id === 'all'){

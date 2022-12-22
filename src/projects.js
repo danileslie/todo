@@ -1,10 +1,10 @@
+/* eslint-disable prefer-const */
 const projects = (() => {
 
         let projectList = [];
 
         const loadedProjects = JSON.parse(localStorage.getItem('projects'));
-        
-    projectList = loadedProjects;
+        projectList = loadedProjects;
         class Project {
             constructor(title, projectIndex){
                 this.title = title;
@@ -15,6 +15,7 @@ const projects = (() => {
         function newProject(title, projectIndex){
             const project = new Project(title, projectIndex);
             projectList.push(project);
+            console.log(projectList);
         }
 
         function deleteProject(projectIndex){
@@ -26,7 +27,6 @@ const projects = (() => {
     }
 return {
     projectList,
-    loadedProjects,
     newProject,
     editProject,
     deleteProject,
