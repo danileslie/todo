@@ -31,7 +31,7 @@ body{
 }
 
 #title > p {
-font-size: 50px;
+font-size: 3rem;
 margin: 10px 0 ;
 }
 
@@ -39,10 +39,16 @@ margin: 10px 0 ;
    grid-row: 1/3;
    grid-column: 1/2;
    background: var(--dark-purple);
+   font-size: 2rem;
+}
+
+#all, #today, #important, #projects{
+    padding-left: 10%;
 }
 
 #projects-list{
     margin-left: 20%;
+    font-size: 1.5rem;
 }
 
 #main{
@@ -60,7 +66,6 @@ margin: 10px 0 ;
 .task-list{
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
 }
 
@@ -74,7 +79,6 @@ margin: 10px 0 ;
 
 .task-div #projects-select{
     border: none;
-    
     border: 1px solid;
     border-radius: 5px;
 }
@@ -120,7 +124,10 @@ margin: 10px 0 ;
 #all, #today, #important, #projects, #title{
     display: flex;
     align-items: center;
-    /* border: 2px solid red; */
+}
+
+#all:hover, #today:hover, #important:hover, .projectDiv:hover{
+    background: purple;
 }
 
 .task-icon{
@@ -161,7 +168,8 @@ form > input, textarea{
 
 .projectDiv{
     display: flex;
-    border: 2px solid red;
+    align-items: center;
+    gap: 1rem;
 }
 
 .fav-important{

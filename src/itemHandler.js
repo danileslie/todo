@@ -77,7 +77,14 @@ const itemHandlers = (() => {
     if (target.id === 'important') {
         ui.importantFilter(tasks.taskList);
     }
+
+    if (target.classList.contains('edit-project-task')){
+        index = parseInt(target.dataset.index, 10);
+        projectIndex = parseInt(target.dataset.projectIndex, 10);
+       ui.changeTaskProject(index); 
+    };
     });
+ 
 })();
 
 export default itemHandlers;

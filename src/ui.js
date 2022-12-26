@@ -111,35 +111,41 @@ const ui = (() => {
 
             projectLabel.setAttribute('for', 'projects-select');
             projectSelect.setAttribute('name', 'projects-select');
-            projectSelect.setAttribute('id', 'projects-select');
+            projectSelect.setAttribute('id', `projects-select-${taskList.indexOf(task)}`);
             projectSelect.setAttribute('form', 'form');
 
-            projectArea.classList.add('projectArea');
+            projectArea.classList.add('project-area');
             projectArea.classList.add('selectContainer');
 
             // create options values through project list entries
+            // create only one of these specific options and buttons for each project entry
 
             const defaultOption = document.createElement('option');
-
-           
+            const projectSelectionEdit = document.createElement('button');
 
             projects.projectList.forEach((project) => {
                 
                 const projectOption = document.createElement('option');
+                
                 projectOption.value = project.title;
                 projectOption.textContent = project.title;
 
                 
                 defaultOption.value = 'No Project';
                 defaultOption.text = 'No Project';
+                projectSelectionEdit.textContent = 'edit';
 
               
                 projectOption.setAttribute('data-project-index', `${projects.projectList.indexOf(project)}`);
+                projectSelect.setAttribute('data-index', `${taskList.indexOf(task)}`);
+                projectSelectionEdit.setAttribute('data-index', `${taskList.indexOf(task)}`);
+                projectSelectionEdit.classList.add('edit-project-task');
 
                 projectSelect.appendChild(defaultOption);
                 projectSelect.appendChild(projectOption);
                 projectArea.appendChild(projectLabel);
                 projectArea.appendChild(projectSelect);
+                projectArea.appendChild(projectSelectionEdit);
                 projectSelect.add(defaultOption, 0);
             })
 
@@ -307,6 +313,20 @@ const ui = (() => {
         updateUi(tasks.taskList);
     }
 
+    function changeTaskProject(index){
+        // grab the project index of the selected project
+        const selectedOption = document.getElementById(`projects-select-${index}`)
+        
+        const optionTest = selectedOption.options[selectedOption.selectedIndex].dataset.projectIndex;
+
+        // grab the necessary div from the dom
+        const selectedDiv = document.querySelector(`[data-index='${index}']`);
+
+        // change its project index for the filter
+
+        selectedDiv.setAttribute('data-project-index', `${optionTest}`);
+        tasks.taskList[index].projectIndex = parseInt(selectedDiv.dataset.projectIndex, 10);
+    }
 
     return {
         removeContent,
@@ -323,6 +343,7 @@ const ui = (() => {
         importantToggle,
         importantFilter,
         completeToggle,
+        changeTaskProject,
 
 
     };
