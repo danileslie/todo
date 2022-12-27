@@ -34,6 +34,8 @@ contentDiv.innerHTML = `
         </div>
         <div id='projects-list'>
             </div>
+
+        <button class='open-task-modal' type='button'>Add a Task</button>
     </div>
 
     <div id='main'>
@@ -43,7 +45,7 @@ contentDiv.innerHTML = `
     <footer id='footer'>Dummy footer content</footer>
 
     <div class='task-form'>
-        <form name='form' method='get'>
+        <form name='form' id='tasks-form' method='get'>
         <!-- Task Title -->
             <div class='title-area'>
                 <label for='enter-title'>Title</label>
@@ -62,16 +64,15 @@ contentDiv.innerHTML = `
                 <input id='enter-due' id='enter-due' name='enter-due' required type='date'>
             </div>
 
-        <!-- Project Selection -->
-            <div class='project-area'>
-
-            </div>
+        <!-- Form Buttons -->
+            <button type='submit' class='add-task' form='form'>Add Task</button>
+            <button type='button' class='add-project' form='form'>Add Project</button>
+        <button type='button' class='cancel' form='form'>Cancel</button>
         </form>
 
-        <!-- Form Buttons -->
-        <button type='submit' class='add-task' form='form'>Add Task</button>
-        <button type='button' class='add-project' form='form'>Add Project</button>
-        <button type='button' class='cancel' form='form'>Cancel</button>
+        
+        
+        
     </div>
 `
 

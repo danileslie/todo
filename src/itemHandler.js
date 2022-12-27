@@ -10,11 +10,23 @@ const itemHandlers = (() => {
     document.addEventListener('click', (e) => {
         const {target} = e;
 
+
+
     // adding task
+
+    if (target.classList.contains('open-task-modal')){
+        ui.openTaskModal();
+    }
+
     if (target.classList.contains('add-task')){
          ui.addTask(); 
+         ui.closeTasks();
         tasks.sortByDate(tasks.taskList);
          ui.updateUi(tasks.taskList);         
+    }
+
+    if (target.classList.contains('cancel')){
+        ui.closeTasks();
     }
 
     // editing task

@@ -14,6 +14,7 @@ const ui = (() => {
     const taskDescription = document.querySelector('#enter-description');
     const taskDue = document.querySelector('#enter-due');
     const form = document.querySelector('form');
+    const newTaskModal = document.querySelector('.task-form');
 
 
 
@@ -328,6 +329,21 @@ const ui = (() => {
         tasks.taskList[index].projectIndex = parseInt(selectedDiv.dataset.projectIndex, 10);
     }
 
+    // modal actions
+
+    function openTaskModal(){
+        form.style.display = 'flex';
+        newTaskModal.classList.add('active');
+        }
+
+    function closeTasks(){
+        form.reset();
+    form.style.display = 'none';
+    newTaskModal.classList.remove('active');
+    }
+
+
+
     return {
         removeContent,
         updateUi,
@@ -344,8 +360,8 @@ const ui = (() => {
         importantFilter,
         completeToggle,
         changeTaskProject,
-
-
+        openTaskModal,
+        closeTasks,
     };
 })();
 
